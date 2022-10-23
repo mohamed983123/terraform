@@ -1,12 +1,9 @@
 resource "aws_subnet" "sub1" {
   vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.3.0/24"
-  availability_zone = "us-east-1a"
+  cidr_block = var.subnet1_cidr
+  availability_zone = var.avzone_sb1
 
   tags = {
     Name = "privite1"
   }
 }
-#variable "avzone" {
- # type = string
-#}

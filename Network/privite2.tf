@@ -1,7 +1,7 @@
 resource "aws_subnet" "sub2" {
   vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.4.0/24"
-  availability_zone = "us-east-1b"
+  cidr_block = var.subnet2_cidr
+  availability_zone = var.avzone_sb2
 
   tags = {
     Name = "privite2"

@@ -1,5 +1,13 @@
 module "mynetwork" {
   source = "./Network"
+  avzone_sb1 = var.avzone_sb11
+
+avzone_sb2 = var.avzone_sb22
+
+subnet3_cidr= var.subnet33_cidr
+subnet4_cidr= var.subnet44_cidr
+subnet1_cidr= var.subnet11_cidr
+subnet2_cidr= var.subnet22_cidr
 
 
   
@@ -16,11 +24,32 @@ resource "aws_db_instance" "myrds" {
   username             = "morshed"
   password             = var.dbpassword
   parameter_group_name = "default.mysql5.7"
+  db_subnet_group_name = aws_db_subnet_group.default.name
   skip_final_snapshot  = true
   port                 = 30000
   vpc_security_group_ids = [module.mynetwork.privitesg]
   
 }
+
+resource "aws_db_subnet_group" "default" {
+  name       = "main"
+  subnet_ids = [module.mynetwork.sub4, module.mynetwork.sub2]
+
+  tags = {
+    Name = "My DB subnet group"
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 variable "dbpassword" {
   type = string
